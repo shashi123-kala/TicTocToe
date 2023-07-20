@@ -13,36 +13,40 @@ public class TicTacToe {
 		checkAxis(column, "Y value is outside the board!");
 		setField(column, row, lastPlayer);
 		lastPlayer = playWithPlayer();
-		if (isWinner()) {
+		if (isWinner(column, row)) {
 			return lastPlayer + " is the Winner";
+		} else if (isDraw()) {
+			return "It is a draw";
+		} else {
+			return "No winner";
 		}
-		else if (isDraw()) {
-            return "It is a draw";
-        } else {
-            return "No winner";
-        }
 	}
-	
-	private boolean isDraw() {
-        for (int x = 0; x < SIZE; x++) {
-            for (int y = 0; y < SIZE; y++) {
-                if (board[x][y] == '\0') {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
-	private boolean isWinner() {
+	private boolean isDraw() {
+		for (int x = 0; x < SIZE; x++) {
+			for (int y = 0; y < SIZE; y++) {
+				if (board[x][y] == '\0') {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean isWinner(int column, int row) {
 		int playerTotal = lastPlayer * SIZE;
-		for (int i = 0; i < SIZE; i++)
-			if (board[0][i] + board[1][i] + board[2][i] == playerTotal
-					|| board[i][0] + board[i][1] + board[i][2] == playerTotal) {
+		char horizontal, vertical, diagonal1, diagonal2;
+		horizontal = vertical = diagonal1 = diagonal2 = '\0';
+		for (int i = 0; i < SIZE; i++) {
+			horizontal += board[i][row - 1];
+			vertical += board[column - 1][i];
+			diagonal1 += board[i][i];
+			diagonal2 += board[i][SIZE - i - 1];
+			if (horizontal == playerTotal || vertical == playerTotal || diagonal1 == playerTotal
+					|| diagonal2 == playerTotal) {
 				return true;
 			}
-		if (board[0][0] + board[1][1] + board[2][2] == playerTotal ||
-	            board[2][0] + board[1][1] + board[0][2] == playerTotal) return true;
+		}
 		return false;
 	}
 
