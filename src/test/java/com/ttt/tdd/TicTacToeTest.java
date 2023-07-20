@@ -64,4 +64,15 @@ public class TicTacToeTest {
 		String actual = tictactoe.play(3, 1); // X
 		assertEquals("X is the Winner", actual);
 	}
+	
+	@Test
+    public void whenPlayAndWholeVerticalLineThenWinner() {
+		tictactoe.play(2,1); // X
+		tictactoe.play(1,1); // O
+		tictactoe.play(3,1); // X
+		tictactoe.play(1,2); // O
+		tictactoe.play(2,2); // X
+        String actual = tictactoe.play(1,3); // O
+        assertEquals("O is the Winner", actual);
+    }
 }
