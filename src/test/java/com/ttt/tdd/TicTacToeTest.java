@@ -42,16 +42,26 @@ public class TicTacToeTest {
 	public void playWithX() {
 		assertEquals('X', tictactoe.playWithPlayer());
 	}
-	
+
 	@Test
-    public void givenLastTurnWasXWhenNextPlayerThenO() {
-		tictactoe.play(1,1);
-        assertEquals('O', tictactoe.playWithPlayer());
-    }
-	
-	 @Test
- 	public void whenPlayThenNoWinner() {
-     	String actual = tictactoe.play(1,1);
-     	assertEquals("No winner", actual);
- 	}
+	public void givenLastTurnWasXWhenNextPlayerThenO() {
+		tictactoe.play(1, 1);
+		assertEquals('O', tictactoe.playWithPlayer());
+	}
+
+	@Test
+	public void whenPlayThenNoWinner() {
+		String actual = tictactoe.play(1, 1);
+		assertEquals("No winner", actual);
+	}
+
+	@Test
+	public void whenPlayAndWholeHorizontalLineThenWinner() {
+		tictactoe.play(1, 1); // X
+		tictactoe.play(1, 2); // O
+		tictactoe.play(2, 1); // X
+		tictactoe.play(2, 2); // O
+		String actual = tictactoe.play(3, 1); // X
+		assertEquals("X is the Winner", actual);
+	}
 }
