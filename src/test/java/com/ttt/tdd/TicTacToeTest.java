@@ -25,4 +25,10 @@ public class TicTacToeTest {
 		tictactoe.play(5, 2);
 	}
 
+	@Test
+	public void RunTimeExceptionFoundWhenYOutsideOfBoard() {
+		exception.expect(TicTacToeException.class);
+		tictactoe.play(2, 6);
+	}
+
 }
